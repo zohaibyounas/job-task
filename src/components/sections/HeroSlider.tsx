@@ -52,7 +52,6 @@ export function HeroSlider() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-
       {/* Background Image */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -77,7 +76,6 @@ export function HeroSlider() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center px-6 md:px-24">
         <div className="max-w-4xl">
-
           <motion.p
             key={`subtitle-${current}`}
             initial={{ opacity: 0, y: 20 }}
@@ -96,32 +94,46 @@ export function HeroSlider() {
           >
             {slides[current].title}
           </motion.h1>
-
         </div>
       </div>
 
       {/* Bottom Left Control */}
       <div className="absolute bottom-12 left-6 md:left-24 z-20 flex items-center gap-8">
-
         {/* Square Thumbnail */}
         <div
           onClick={nextSlide}
-          className="relative w-24 h-24 cursor-pointer"
+          className="relative w-24 h-24 cursor-pointer group"
         >
-          {/* Border frame */}
-          <div className="absolute inset-0 border border-white/40" />
+          {/* Animated rotating border */}
+          <div className="absolute inset-0">
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                background: `conic-gradient(
+          from 0deg,
+          white ${progress * 3.6}deg,
+          transparent 0deg
+        )`,
+              }}
+            />
+          </div>
+
+          {/* Inner border frame */}
+          <div className="absolute inset-[2px] bg-black/40" />
+
+          {/* Image */}
+          <div className="absolute inset-[4px] overflow-hidden">
+            <Image
+              src={slides[current].image}
+              alt="slide"
+              fill
+              sizes="96px"
+              className="object-cover"
+            />
+          </div>
 
           {/* Corner accent */}
           <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-white" />
-
-          {/* Image */}
-          <Image
-            src={slides[current].image}
-            alt="slide"
-            fill
-            sizes="96px"
-            className="object-cover p-1"
-          />
 
           {/* Next label */}
           <div className="absolute bottom-1 left-2 text-white text-xs tracking-widest">
@@ -131,7 +143,6 @@ export function HeroSlider() {
 
         {/* SQUARE PAGINATION (1 → 3) */}
         <div className="flex items-center gap-3">
-
           {slides.slice(0, 3).map((_, index) => {
             const isActive = current === index;
 
@@ -140,10 +151,11 @@ export function HeroSlider() {
                 key={index}
                 onClick={() => setCurrent(index)}
                 className={`w-10 h-10 flex items-center justify-center border cursor-pointer transition-all duration-300
-            ${isActive
-                    ? "border-white text-white"
-                    : "border-white/30 text-white/40"
-                  }`}
+            ${
+              isActive
+                ? "border-white text-white"
+                : "border-white/30 text-white/40"
+            }`}
               >
                 <span className="text-xs font-semibold">
                   {String(index + 1).padStart(2, "0")}
@@ -151,9 +163,7 @@ export function HeroSlider() {
               </div>
             );
           })}
-
         </div>
-
       </div>
 
       {/* Bottom gradient */}

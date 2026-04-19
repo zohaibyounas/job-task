@@ -3,11 +3,11 @@
 @theme {
   --font-sans: var(--font-work-sans);
 
-  --color-primary: #1A2E1A;
-  --color-secondary: #F5F2ED;
-  --color-accent: #8FB339;
-  
-  --color-border: #E5E7EB;
+  --color-primary: #1a2e1a;
+  --color-secondary: #f5f2ed;
+  --color-accent: #8fb339;
+
+  --color-border: #e5e7eb;
   --color-background: #ffffff;
   --color-foreground: #111111;
 
